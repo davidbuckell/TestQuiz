@@ -1,0 +1,20 @@
+﻿#chart {
+    overflow-x: auto;
+}
+
+.chart rect {
+    stroke: white;
+    fill: steelblue;
+}
+
+.chart text {
+    font: 13px sans-serif;
+    fill: red;
+}
+
+.chart rect {
+    font: 10px sans-serif;
+    color: black;
+    stroke: none;
+    fill: #0f71b7;
+}
