@@ -9,6 +9,7 @@ const Admin = () => {
 
     const [hubConnection, setHubConnection] = useState();
     const [usersPoints, setUsersPoints] = useState([]);
+    const [category, setCategory] = useState('Test');
 
     const increaseData = async () => {
         try {
@@ -38,7 +39,7 @@ const Admin = () => {
 
     const getQuestions = async () => {
         try {
-            await hubConnection.invoke("GetCategoryQuestions", "Television");
+            await hubConnection.invoke("GetCategoryQuestions", category);
         } catch (err) {
             console.log(err)
         }
@@ -50,6 +51,18 @@ const Admin = () => {
         } catch (err) {
             console.log(err)
         }
+    }
+
+    const resetPointsToZero = async () => {
+        try {
+            hubConnection.invoke("ResetPointsToZero")
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const categoryChanged = (event) => {
+        setCategory(event.target.value);
     }
 
     useEffect(() => {
@@ -86,8 +99,17 @@ const Admin = () => {
             <button onClick={increaseData}>Increase</button>
             <button onClick={decreaseData}>Decrease</button>
             <button onClick={addData}>Add</button>
+            <select id="category" onChange={categoryChanged} value={category}>
+                <option value="Test">Test</option>
+                <option value="Television">Television</option>
+                <option value="GeneralKnowledge">General Knowledge</option>
+                <option value="Music">Music</option>
+                <option value="Football">Football</option>
+                <option value="WhichOnesJeff">Which Ones Jeff</option>                
+            </select>
             <button onClick={getQuestions}>Get Question</button>
-            <button onClick={clearSession}>Clear Session</button>            
+            <button onClick={resetPointsToZero}>Reset Points</button>
+            <button onClick={clearSession}>Clear Session</button>
             <BarChart usersPoints={usersPoints} />
         </React.Fragment>
     );

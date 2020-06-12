@@ -2,9 +2,9 @@
 using dotnetcore_react_signalr.Helpers;
 using dotnetcore_react_signalr.Models;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace dotnetcore_react_signalr
@@ -73,14 +73,29 @@ namespace dotnetcore_react_signalr
             _users.Clear();
         }
 
+        public async Task ResetPointsToZero()
+        {
+            lock (_users)
+            {                
+                foreach(var userPoints in _users.Values)
+                {
+                    userPoints.Points = 0;
+                }
+            }
+
+            await RetrieveScores();
+        }
+
         public async Task GetCategoryQuestions(QuizCategory quizCategory)
         {
             var categoryQuestions = Questions[quizCategory];
             foreach (var question in categoryQuestions)
             {
-                await Clients.Others.SendAsync("receiveQuestion", question);
+                await Clients.Others.SendAsync("receiveQuestion", quizCategory, question);
                 await Task.Delay(10000);
             }
+
+            await Clients.Others.SendAsync("roundComplete", quizCategory);
         }
 
         public async Task SubmitAnswer(QuizCategory quizCategory, int questionId, int answerId)
@@ -102,5 +117,27 @@ namespace dotnetcore_react_signalr
                 await RetrieveScores();
             }
         }
+
+        public override Task OnDisconnectedAsync(Exception exception)
+        {
+            lock (_users)
+            {
+                var connectionID = Context.ConnectionId;
+                if (_users.ContainsKey(connectionID))
+                {
+                    _users.Remove(connectionID);
+                }
+            }
+
+            return base.OnDisconnectedAsync(exception);
+        }
+
+        //public override Task OnConnectedAsync()
+        //{
+            //var id = Context.GetHttpContext().Connection.Id;
+            //string name = Context.User.Identity.Name;
+            //var connectionID = Context.ConnectionId;
+            //return base.OnConnectedAsync();
+        //}
     }
 }

@@ -1,18 +1,18 @@
-﻿import React, { useState } from 'react'
+﻿import React from 'react'
 const Question = (props) => {
     const data = props.questionData;
+    const answerSubmitted = props.answerSubmitted;
+    const setAnswerSubmitted = props.setAnswerSubmitted;
 
     function submitAnswer(option) {
-        console.log('clicked ' + option);
+        setAnswerSubmitted(true);
         props.submitAnswer(data.questionId, option);
     }
-
-    console.log('question data is ' + JSON.stringify(data));
 
     return (
         <React.Fragment>
             <p>{data.questionText}</p>
-            {data.answers && data.answers.map((answer, index) => (
+            {data.answers && !answerSubmitted && data.answers.map((answer, index) => (
                 <button key={index} onClick={submitAnswer.bind(this, answer.answerId)}>{answer.answerText}</button>                
             ))}
         </React.Fragment>

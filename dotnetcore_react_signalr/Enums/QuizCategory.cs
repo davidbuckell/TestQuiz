@@ -2,6 +2,7 @@
 {
     public enum QuizCategory
     {
+        Test,
         Television,
         GeneralKnowledge,
         Music,

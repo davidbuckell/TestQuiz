@@ -7,12 +7,10 @@ const BarChart = (props) => {
     const data = props.usersPoints    
     
     useEffect(() => {
-        console.log('initial graph ' + data.toString());
         drawBarChart(data)
     }, []);    
 
-    useEffect(() => {
-        console.log('update graph ' + JSON.stringify(data));
+    useEffect(() => {        
         updateBarChartMerge(data)
     }, [data]);    
 
