@@ -66,10 +66,10 @@ const Admin = () => {
     }
 
     useEffect(() => {
-        var password = window.prompt('Enter Password');
-        if (password !== "quizmaster") {
-            window.location = "/";
-        }
+        //var password = window.prompt('Enter Password');
+        //if (password !== "quizmaster") {
+        //window.location = "/";
+        //}
         const createHubConnection = async () => {
             const connect = new HubConnectionBuilder()
                 .withUrl("/quizHub", {
@@ -99,22 +99,37 @@ const Admin = () => {
     }, []);
 
     return (
-        <React.Fragment>            
-            <button onClick={increaseData}>Increase</button>
-            <button onClick={decreaseData}>Decrease</button>
-            <button onClick={addData}>Add</button>
-            <select id="category" onChange={categoryChanged} value={category}>
-                <option value="Test">Test</option>
-                <option value="Television">Television</option>
-                <option value="GeneralKnowledge">General Knowledge</option>
-                <option value="Music">Music</option>
-                <option value="Football">Football</option>
-                <option value="WhichOnesJeff">Which Ones Jeff</option>                
-            </select>
-            <button onClick={getQuestions}>Get Questions</button>
-            <button onClick={resetPointsToZero}>Reset Points</button>
-            <button onClick={clearSession}>Clear Session</button>
-            <BarChart usersPoints={usersPoints} />
+        <React.Fragment>
+            <div className="row">
+                <div className="col-2">
+                    <select id="category" onChange={categoryChanged} value={category}>
+                        <option value="Test">Test</option>
+                        <option value="Television">Television</option>
+                        <option value="GeneralKnowledge">General Knowledge</option>
+                        <option value="Music">Music</option>
+                        <option value="Football">Football</option>
+                        <option value="WhichOnesJeff">Which Ones Jeff</option>
+                    </select>
+                </div>
+                <div className="col-1"></div>
+                <div className="col-2">
+                    <button onClick={getQuestions} className="button primary">Get Questions</button>
+                </div>
+                <div className="col-1"></div>
+                <div className="col-2">
+                    <button onClick={resetPointsToZero} className="button">Reset Points</button>
+                </div>
+                <div className="col-1"></div>
+                <div className="col-2">
+                    <button onClick={clearSession} className="button primary">Clear Session</button>
+                </div>
+                <div className="col-1"></div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <BarChart usersPoints={usersPoints} />
+                </div>
+            </div>
         </React.Fragment>
     );
 }
