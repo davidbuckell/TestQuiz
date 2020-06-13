@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace dotnetcore_react_signalr
@@ -99,6 +100,9 @@ namespace dotnetcore_react_signalr
             {
                 await Clients.Others.SendAsync("receiveQuestion", quizCategory, question);
                 await Task.Delay(10000);
+                var correctAnswer = question.Answers.FirstOrDefault(p => p.AnswerId.Equals(question.CorrectAnswerId)).AnswerText;
+                await Clients.Others.SendAsync("displayAnswer", correctAnswer);
+                await Task.Delay(5000);
             }
 
             await Clients.Others.SendAsync("roundComplete", quizCategory);

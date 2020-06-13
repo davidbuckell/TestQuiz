@@ -16,6 +16,7 @@ const Quiz = () => {
     const [questionData, setQuestionData] = useState('');
     const [isRegistered, setIsRegistered] = useState(false);
     const [answerSubmitted, setAnswerSubmitted] = useState(false);
+    const [correctAnswer, setCorrectAnswer] = useState('');
     
     const register = async () => {
         try {
@@ -56,7 +57,8 @@ const Quiz = () => {
                 console.log(err)
             }
             
-            connect.on('receiveQuestion', (category, receivedQuestion) => {                
+            connect.on('receiveQuestion', (category, receivedQuestion) => {
+                setCorrectAnswer('');
                 setAnswerSubmitted(false);
                 setCategory(`It's the ${category} round!`);
                 setQuestionCount(`    Here comes question ${receivedQuestion.questionId} of 10...`);
@@ -74,11 +76,16 @@ const Quiz = () => {
                 }, 1000);                
             });
 
+            connect.on('displayAnswer', (correctAnswer) => {
+                setCorrectAnswer(`And the correct answer was ${correctAnswer}!`);                
+            });
+
             connect.on('updateUsersPoints', (usersPoints) => {
                 setUsersPoints(usersPoints);
             });
 
             connect.on('roundComplete', (category) => {
+                setCorrectAnswer('');
                 setCategory(`And that completes the ${category} round!`);
                 setQuestionCount('');
                 setQuestionData({ questionText: "    Let's take a look at the scores..." });                
@@ -100,7 +107,7 @@ const Quiz = () => {
     } else {
         return (
             <React.Fragment >
-                <label id="questionHeader"><strong>{category}</strong>{questionCount}</label><em><span id="countdown"></span></em>
+                <label id="questionHeader"><strong>{category}</strong>{questionCount}</label><em><span id="countdown"></span></em>&nbsp;&nbsp;&nbsp;&nbsp;<label id="correctAnswer">{correctAnswer}</label>
                 <Question questionData={questionData} submitAnswer={submitAnswer} answerSubmitted={answerSubmitted} setAnswerSubmitted={setAnswerSubmitted} />
                 <BarChart usersPoints={usersPoints} />
             </React.Fragment >

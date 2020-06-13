@@ -67,7 +67,7 @@ const Admin = () => {
 
     useEffect(() => {
         var password = window.prompt('Enter Password');
-        if (password != "letmein") {
+        if (password !== "quizmaster") {
             window.location = "/";
         }
         const createHubConnection = async () => {
@@ -111,7 +111,7 @@ const Admin = () => {
                 <option value="Football">Football</option>
                 <option value="WhichOnesJeff">Which Ones Jeff</option>                
             </select>
-            <button onClick={getQuestions}>Get Question</button>
+            <button onClick={getQuestions}>Get Questions</button>
             <button onClick={resetPointsToZero}>Reset Points</button>
             <button onClick={clearSession}>Clear Session</button>
             <BarChart usersPoints={usersPoints} />
