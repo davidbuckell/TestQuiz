@@ -44,8 +44,13 @@ namespace dotnetcore_react_signalr
         //    await Clients.Group(groupName).SendAsync("Send", $"{Context.ConnectionId} has joined the group");
         //}
 
-        public async Task RegisterSession(string username)
+        public async Task<bool> RegisterSession(string username)
         {
+            if (_users.Any(p => p.Value.Name.Equals(username, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return false;
+            }
+
             lock (_users)
             {
                 var connectionID = Context.ConnectionId;
@@ -56,6 +61,7 @@ namespace dotnetcore_react_signalr
             }
 
             await RetrieveScores();
+            return true;
         }
 
         public async Task RetrieveScores()

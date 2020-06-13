@@ -19,9 +19,14 @@ const Quiz = () => {
     
     const register = async () => {
         try {
-            await hubConnection.invoke("RegisterSession", userName);
-            setUserName('');
-            setIsRegistered(true);
+            var registered = await hubConnection.invoke("RegisterSession", userName);
+            if (registered) {
+                setUserName('');
+                setIsRegistered(true);
+            }
+            else {
+                document.getElementById('registerLabel').innerText = "Username already taken, enter another:"
+            }
         } catch (err) {
             console.log(err)
         }
@@ -87,6 +92,7 @@ const Quiz = () => {
     if (!isRegistered) {
         return (
             <React.Fragment >
+                <label id="registerLabel">Enter your username:</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="text" value={userName} onChange={e => setUserName(e.target.value)} maxLength="10" /><button onClick={register}>Register</button>
                 <BarChart usersPoints={usersPoints} />
             </React.Fragment >
