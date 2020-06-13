@@ -66,10 +66,10 @@ const Admin = () => {
     }
 
     useEffect(() => {
-        //var password = window.prompt('Enter Password');
-        //if (password !== "quizmaster") {
-        //window.location = "/";
-        //}
+        var password = window.prompt('Enter Password');
+        if (password !== "quizmaster") {
+        window.location = "/";
+        }
         const createHubConnection = async () => {
             const connect = new HubConnectionBuilder()
                 .withUrl("/quizHub", {
