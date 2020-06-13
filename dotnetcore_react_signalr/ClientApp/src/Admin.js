@@ -100,6 +100,7 @@ const Admin = () => {
 
     return (
         <React.Fragment>
+            <h1>Dave's Quiz Admin Page</h1>
             <div className="row">
                 <div className="col-2">
                     <select id="category" onChange={categoryChanged} value={category}>

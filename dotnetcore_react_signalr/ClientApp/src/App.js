@@ -102,6 +102,7 @@ const Quiz = () => {
     if (!isRegistered) {
         return (
             <React.Fragment>
+                <h1>Welcome to Daves' Quiz!</h1>
                 <div className="row">
                     <div className="col-5">
                         <h3 id="registerLabel">Enter your username:</h3>
@@ -123,6 +124,7 @@ const Quiz = () => {
     } else {
         return (
             <React.Fragment>
+                <h1>Welcome to Dave's Quiz!</h1>
                 <div className="row">
                     <div className="col-12">
                         <h3 id="questionHeader"><strong>{category}</strong></h3>
