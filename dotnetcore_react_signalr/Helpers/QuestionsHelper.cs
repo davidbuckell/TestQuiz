@@ -681,7 +681,7 @@ namespace dotnetcore_react_signalr.Helpers
                                 new AnswerModel { AnswerId = 5, AnswerText = "XL" },
                                 new AnswerModel { AnswerId = 6, AnswerText = "Critical Music" }
                             },
-                            CorrectAnswerId = 1
+                            CorrectAnswerId = 5
                         },
                         new QuestionModel {
                             QuestionId = 9,
