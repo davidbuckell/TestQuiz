@@ -1,5 +1,7 @@
 trigger:
 - main
+- master
+- releases/*
 
 pool:
   vmImage: 'ubuntu-latest'
