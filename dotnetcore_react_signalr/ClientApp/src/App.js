@@ -12,12 +12,14 @@ const Quiz = () => {
     const [userName, setUserName] = useState('');
     const [usersPoints, setUsersPoints] = useState([]);
     const [category, setCategory] = useState('');
+    const [categoryRound, setCategoryRound] = useState('');
     const [questionCount, setQuestionCount] = useState('Get ready, the quiz is about to start!');
     const [questionData, setQuestionData] = useState('');
     const [isRegistered, setIsRegistered] = useState(false);
     const [answerSubmitted, setAnswerSubmitted] = useState(false);
     const [correctAnswer, setCorrectAnswer] = useState('');
     const [activeQuestion, setActiveQuestion] = useState(false);
+    const [questionImage, setQuestionImage] = useState('');
 
     const register = async () => {
         try {
@@ -38,7 +40,7 @@ const Quiz = () => {
 
     const submitAnswer = async (questionId, answerId) => {
         try {
-            await hubConnection.invoke("SubmitAnswer", "Television", questionId, answerId)
+            await hubConnection.invoke("SubmitAnswer", category, questionId, answerId)
         } catch (err) {
             console.log(err)
         }
@@ -64,8 +66,10 @@ const Quiz = () => {
                 setCorrectAnswer('');
                 setActiveQuestion(true);
                 setAnswerSubmitted(false);
-                setCategory(`It's the ${category} round!`);
-                setQuestionCount(`    Here comes question ${receivedQuestion.questionId} of ${questionsCount}...`);
+                setCategory(category);
+                setQuestionImage(`${category}_${receivedQuestion.questionId}.jpg`);
+                setCategoryRound(`It's the ${category} round!`);
+                setQuestionCount(`Here comes question ${receivedQuestion.questionId} of ${questionsCount}...`);
                 setQuestionData(receivedQuestion);
                 var timeleft = 29;
                 var downloadTimer = setInterval(function () {
@@ -75,7 +79,7 @@ const Quiz = () => {
                         document.getElementById("countdown").innerHTML = finalText;
                         setAnswerSubmitted(true);
                     } else {
-                        document.getElementById("countdown").innerHTML = "    You have " + timeleft + " seconds left to answer...";
+                        document.getElementById("countdown").innerHTML = "Hurry! The answer will be revealed in " + timeleft + " seconds...";
                     }
                     timeleft -= 1;
                 }, 1000);
@@ -129,20 +133,15 @@ const Quiz = () => {
                 <h1>Welcome to Dave's Quiz!</h1>
                 <div className="row">
                     <div className="col-12">
-                        <h3 id="questionHeader"><strong>{category}</strong></h3>
-                        <h4>{questionCount}</h4>
+                        <h3 id="questionHeader"><strong>{categoryRound}</strong></h3>
+                        <h4>{questionCount}</h4><h6><em><span id="countdown"></span></em></h6>
+                        <h4 id="correctAnswer">{correctAnswer}</h4>
                         <hr />
                     </div>
                     {activeQuestion ? (
                         <React.Fragment>
                             <div className="col-12">
-                                <Question questionData={questionData} submitAnswer={submitAnswer} answerSubmitted={answerSubmitted} setAnswerSubmitted={setAnswerSubmitted} />
-                                <h4 id="correctAnswer">{correctAnswer}</h4>
-                            </div>
-                            <div className="col-12">
-                                <hr />
-                                <h6><em><span id="countdown"></span></em></h6>
-                                <hr />
+                                <Question questionData={questionData} submitAnswer={submitAnswer} answerSubmitted={answerSubmitted} setAnswerSubmitted={setAnswerSubmitted} questionImage={questionImage} />
                             </div>
                         </React.Fragment>
                     ) : ("")}

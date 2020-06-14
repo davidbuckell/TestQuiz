@@ -102,29 +102,27 @@ const Admin = () => {
         <React.Fragment>
             <h1>Dave's Quiz Admin Page</h1>
             <div className="row">
-                <div className="col-2">
-                    <select id="category" onChange={categoryChanged} value={category}>
-                        <option value="Test">Test</option>
-                        <option value="Television">Television</option>
-                        <option value="GeneralKnowledge">General Knowledge</option>
-                        <option value="Music">Music</option>
-                        <option value="Football">Football</option>
-                        <option value="WhichOnesJeff">Which Ones Jeff</option>
-                    </select>
-                </div>
-                <div className="col-1"></div>
-                <div className="col-2">
-                    <button onClick={getQuestions} className="button primary">Get Questions</button>
-                </div>
-                <div className="col-1"></div>
-                <div className="col-2">
-                    <button onClick={resetPointsToZero} className="button">Reset Points</button>
-                </div>
-                <div className="col-1"></div>
-                <div className="col-2">
-                    <button onClick={clearSession} className="button primary">Clear Session</button>
-                </div>
-                <div className="col-1"></div>
+                <ul className="actions">
+                    <li>
+                        <select id="category" onChange={categoryChanged} value={category}>
+                            <option value="Test">Test</option>
+                            <option value="Television">Television</option>
+                            <option value="Football">Football</option>                            
+                            <option value="Music">Music</option>
+                            <option value="GeneralKnowledge">General Knowledge</option>
+                            <option value="Prodigy">Prodigy</option>
+                        </select>
+                    </li>
+                    <li>
+                        <button onClick={getQuestions} className="button primary">Get Questions</button>
+                    </li>
+                    <li>
+                        <button onClick={resetPointsToZero} className="button">Reset Points</button>
+                    </li>
+                    <li>
+                        <button onClick={clearSession} className="button primary">Clear Session</button>
+                    </li>
+                </ul>
             </div>
             <div className="row">
                 <div className="col-12">

@@ -7,6 +7,6 @@
         GeneralKnowledge,
         Music,
         Football,
-        WhichOnesJeff
+        Prodigy
     }
 }

@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\public\assets\css\" />
+    <Folder Include="ClientApp\public\assets\images\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
