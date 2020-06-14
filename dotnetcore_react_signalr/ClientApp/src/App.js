@@ -65,7 +65,7 @@ const Quiz = () => {
                 setCategory(`It's the ${category} round!`);
                 setQuestionCount(`    Here comes question ${receivedQuestion.questionId} of ${questionsCount}...`);
                 setQuestionData(receivedQuestion);
-                var timeleft = 9;
+                var timeleft = 29;
                 var downloadTimer = setInterval(function () {
                     if (timeleft <= 0) {
                         clearInterval(downloadTimer);
