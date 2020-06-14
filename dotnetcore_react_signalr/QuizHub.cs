@@ -99,7 +99,7 @@ namespace dotnetcore_react_signalr
             foreach (var question in categoryQuestions)
             {
                 await Clients.Others.SendAsync("receiveQuestion", quizCategory, question, categoryQuestions.Count);
-                await Task.Delay(10000);
+                await Task.Delay(30000);
                 var correctAnswer = question.Answers.FirstOrDefault(p => p.AnswerId.Equals(question.CorrectAnswerId)).AnswerText;
                 await Clients.Others.SendAsync("displayAnswer", correctAnswer);
                 await Task.Delay(5000);
