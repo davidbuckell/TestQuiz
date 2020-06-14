@@ -58,7 +58,7 @@ namespace dotnetcore_react_signalr.Helpers
                     QuizCategory.Television, new List<QuestionModel>() {
                         new QuestionModel {
                             QuestionId = 1,
-                            QuestionText = "On TV show Strike it lucky, how many TV screens where there in total?",
+                            QuestionText = "On TV show Strike it lucky, how many TV screens were there in total?",
                             Answers = new List<AnswerModel> {
                                 new AnswerModel { AnswerId = 1, AnswerText = "10" },
                                 new AnswerModel { AnswerId = 2, AnswerText = "15" },
@@ -97,7 +97,7 @@ namespace dotnetcore_react_signalr.Helpers
                         },
                         new QuestionModel {
                             QuestionId = 4,
-                            QuestionText = "In the first series of friends, where the two apartment numbers?",
+                            QuestionText = "In the first series of friends, what were the two apartment numbers?",
                             Answers = new List<AnswerModel> {
                                 new AnswerModel { AnswerId = 1, AnswerText = "4 & 5" },
                                 new AnswerModel { AnswerId = 2, AnswerText = "6 & 7" },
@@ -421,7 +421,7 @@ namespace dotnetcore_react_signalr.Helpers
                         },
                         new QuestionModel {
                             QuestionId = 9,
-                            QuestionText = "How many times did Meredith Brooks insist she was bitch during hit single?",
+                            QuestionText = "How many times did Meredith Brooks insist she was a bitch during her hit single?",
                             Answers = new List<AnswerModel> {
                                 new AnswerModel { AnswerId = 1, AnswerText = "2" },
                                 new AnswerModel { AnswerId = 2, AnswerText = "4" },
