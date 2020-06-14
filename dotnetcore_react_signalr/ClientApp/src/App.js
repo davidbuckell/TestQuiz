@@ -21,13 +21,15 @@ const Quiz = () => {
 
     const register = async () => {
         try {
-            var registered = await hubConnection.invoke("RegisterSession", userName);
-            if (registered) {
-                setUserName('');
-                setIsRegistered(true);
-            }
-            else {
-                document.getElementById('registerLabel').innerText = "Username already taken, enter another:"
+            if (userName) {
+                var registered = await hubConnection.invoke("RegisterSession", userName);
+                if (registered) {
+                    setUserName('');
+                    setIsRegistered(true);
+                }
+                else {
+                    document.getElementById('registerLabel').innerText = "Username already taken, enter another:"
+                }
             }
         } catch (err) {
             console.log(err)
