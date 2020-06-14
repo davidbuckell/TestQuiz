@@ -21,16 +21,14 @@ const Question = (props) => {
                 {data.answers && !answerSubmitted && data.answers.map((answer, index) => {
                     return index % 2 === 0 ?
                         <React.Fragment>
-                            <div className="col-1">
+                            <div className="col-2">
                                 <button key={index} onClick={submitAnswer.bind(this, answer.answerId)} className="button primary large">{answer.answerText}</button>
-                            </div>
-                            <div className="col-1"></div>
+                            </div>                            
                         </React.Fragment>
                         : <React.Fragment>
-                            <div className="col-1">
+                            <div className="col-2">
                                 <button key={index} onClick={submitAnswer.bind(this, answer.answerId)} className="button large">{answer.answerText}</button>
                             </div>
-                            <div className="col-1"></div>
                         </React.Fragment>
                 })}
             </div>
