@@ -4,7 +4,7 @@ const Question = (props) => {
     const answerSubmitted = props.answerSubmitted;
     const setAnswerSubmitted = props.setAnswerSubmitted;
 
-    function submitAnswer(option) {
+    function submitAnswer(option) {        
         setAnswerSubmitted(true);
         props.submitAnswer(data.questionId, option);
     }
@@ -18,19 +18,21 @@ const Question = (props) => {
             </div>
             <br/>
             <div className="row">
+                <ul className="actions stacked">
                 {data.answers && !answerSubmitted && data.answers.map((answer, index) => {
                     return index % 2 === 0 ?
                         <React.Fragment>
-                            <div className="col-2">
-                                <button key={index} onClick={submitAnswer.bind(this, answer.answerId)} className="button primary large">{answer.answerText}</button>
-                            </div>                            
+                            <li>
+                                <a key={index} href="#" onClick={submitAnswer.bind(this, answer.answerId)} className="button primary large">{answer.answerText}</a>
+                            </li>
                         </React.Fragment>
                         : <React.Fragment>
-                            <div className="col-2">
-                                <button key={index} onClick={submitAnswer.bind(this, answer.answerId)} className="button large">{answer.answerText}</button>
-                            </div>
+                            <li>
+                                <a key={index} href="#" onClick={submitAnswer.bind(this, answer.answerId)} className="button large">{answer.answerText}</a>
+                            </li>
                         </React.Fragment>
                 })}
+                </ul>
             </div>
             <br/>
         </React.Fragment>
